@@ -2,13 +2,45 @@
   "name": "tc2-web-service",
   "version": "0.0.0",
   "private": true,
+  "nodemonConfig": {
+    "exec": "yarn run dev",
+    "watch": [
+      "server/*",
+      "public/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
+  },
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "yarn run prod",
+    "server": "node ./dist-server/app.js",
+    "transpile": "babel ./src --out-dir dist-server",
+    "clean": "rimraf dist-server",
+    "build": "yarn run clean && yarn run transpile",
+    "dev": "yarn run build && yarn run server",
+    "watch:dev": "nodemon",
+    "prod": "yarn run build && yarn run server"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "mongoose": "^5.11.8",
     "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "nodemon": "^2.0.6",
+    "rimraf": "^3.0.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   }
 }
