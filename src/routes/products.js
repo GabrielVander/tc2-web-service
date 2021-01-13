@@ -1,20 +1,45 @@
+import {add, deleteById, getAll, getById} from "../service/productService";
+
 const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.send('Get all products');
+    getAll()
+        .then(result => res.send(result))
+        .catch(err => {
+            res
+                .status(500)
+                .send(err);
+        })
 });
 
 router.post('/', (req, res) => {
-  res.send('Add product with payload: ' + req.body);
+    add(req.body)
+        .then(result => res.send(result))
+        .catch(err => res
+            .status(500)
+            .send(err)
+        );
 });
 
 router.get('/:productId', (req, res) => {
-  res.send(`Get product with id ${req.params.productId}`);
+    getById(req.params.productId)
+        .then(result => res
+            .status(result ? 200 : 404)
+            .send(result))
+        .catch(err => res
+            .status(500)
+            .send(err));
 });
 
 router.delete('/:productId', (req, res) => {
-  res.send(`Delete product with id ${req.params.productId}`);
+    deleteById(req.params.productId)
+        .then(result => res
+            .status(result ? 200 : 404)
+            .send(result))
+        .catch(err => res
+            .status(500)
+            .send(err));
 })
 
 module.exports = router;

@@ -5,8 +5,7 @@
   "nodemonConfig": {
     "exec": "yarn run dev",
     "watch": [
-      "server/*",
-      "public/*"
+      "src/*"
     ],
     "ignore": [
       "**/__tests__/**",
