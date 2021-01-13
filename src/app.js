@@ -3,7 +3,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import indexRouter from "./routes";
-import usersRouter from "./routes/users";
+import productsRouter from "./routes/products";
 import {port} from "./env";
 import {createServer} from "http";
 
@@ -17,7 +17,7 @@ app.use(cookieParser());
 initializeMongoose();
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/products', productsRouter);
 
 const server = createServer(app);
 
