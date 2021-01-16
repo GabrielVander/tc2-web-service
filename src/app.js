@@ -23,7 +23,7 @@ app.use('/products', productsRouter);
 
 const server = createServer(app);
 
-server.listen(port, 'localhost');
+server.listen(port, '0.0.0.0');
 server.on('listening', () => {
     console.log('Express src started on port %s at %s', server.address().port, server.address().address);
 });
